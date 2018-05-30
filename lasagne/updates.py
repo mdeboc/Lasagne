@@ -687,7 +687,8 @@ def nadam(loss_or_grads, params, learning_rate=0.001, beta1=0.9,
 
         m_t = beta1*m_prev + (one-beta1)*g_t
         v_t = beta2*v_prev + (one-beta2)*g_t**2
-        step = a_t*(beta1*m_prev + (one-beta1)*g_t/(one-beta1**t))/(T.sqrt(v_t) + epsilon)
+        step = a_t*(beta1*m_t + (one-beta1)*g_t/(one-beta1**t)) /\
+               (T.sqrt(v_t) + epsilon)
 
         updates[m_prev] = m_t
         updates[v_prev] = v_t
